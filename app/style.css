@@ -45,6 +45,13 @@
     -o-user-select: none;
     user-select: none;
 }
+
+.sudoku-input-hover {
+    transition: background-color 0.5s ease;
+    opacity: 0.8;
+    background-color: rgba(36, 36, 36, 0.94);
+}
+
 .sudoku-fix-input {
     background-color: rgba(216, 21, 66, 0.47);
 }
@@ -52,5 +59,6 @@
     color: blue;
 }
 .sudoku-invalid-input {
-    color: red;
+    color: rgba(255, 0, 0, 0.76);
+    z-index: 100;
 }

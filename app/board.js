@@ -31,14 +31,33 @@ define(["jquery"], function ($) {
                         var innerRow = $('<tr></tr>').addClass('sudoku-sub-row');
                         for (var l = 0; l < 3; l++) {
                             var userCell = $('<td></td>');
-                            userCell.addClass('sudoku-input').text(this.gameBoard[i][j][k][l]);
-                            userCell.bind("click", (function (i, j, k, l) {
+                            userCell.addClass('sudoku-input');
+                            if (this.gameBoard[i][j][k][l] !== 0) {
+                                userCell.text(this.gameBoard[i][j][k][l]);
+                            }
+                            userCell.bind("click", (function (board, i, j, k, l) {
                                 return function () {
 //                                    console.log(i, j, k, l);
+                                    // check the cell
+                                    for (var a=0; a<3; a++) {
+                                        for (var b=0; b<3; b++) {
+//                                            console.log(board[i][j][a][b]);
+                                        }
+                                    }
+                                    
+                                    for (var a=0; a<3; a++) {
+                                        for (var b=0; b<3; b++) {
+//                                            console.log(board[i][a][k][b]);
+                                        }
+                                    }
+                                    
+                                    for (var a=0; a<3; a++) {
+                                        for (var b=0; b<3; b++) {
+//                                            console.log(board[a][j][b][l]);
+                                        }
+                                    }
                                 };
-                            })(i, j, k, l));
-                            //(3*i+k)*10+3*j+l
-                            //                    userCell.attr("id", );
+                            })(this.gameBoard, i, j, k, l));
                             innerRow.append(userCell);
                         }
                         cellTable.append(innerRow);

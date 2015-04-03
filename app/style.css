@@ -40,4 +40,15 @@
     border: dashed;
     border-width: 1px 1px 1px 1px;
     padding: 0;
+    border-color:cornflowerblue;
+    border-radius: 2px;
+
+}
+
+.sudoku-valid-input {
+    color: blue;
+}
+
+.sudoku-invalid-input {
+    color: red;
 }

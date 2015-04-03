@@ -1,4 +1,5 @@
 define(["board"], function (board) {
     'use strict';
-    board.init(".board-container");
+    var gameboard = new board();
+    gameboard.init(".board-container");
 });

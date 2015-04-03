@@ -44,12 +44,18 @@ define(["jquery", "engine"], function ($, engine) {
     };
 
     Board.prototype.init = function (container) {
-        var table = $('<table></table>').addClass('sudoku-table');
+        var table = $('<table></table>');
+        table.addClass('sudoku-table');
+        table.attr("cellpadding", 0);
+        table.attr("cellspacing", 0);
+        table.attr("border", 0);
         for (var i = 0; i < 3; i++) {
             var row = $('<tr></tr>').addClass('sudoku-row');
             for (var j = 0; j < 3; j++) {
                 var cell = $('<td></td>').addClass('sudoku-cell');
                 var cellTable = $('<table></table>').addClass('sudoku-sub-stable');
+                        cellTable.attr("cellpadding", 0);
+        cellTable.attr("cellspacing", 0);
                 for (var k = 0; k < 3; k++) {
                     var innerRow = $('<tr></tr>').addClass('sudoku-sub-row');
                     for (var l = 0; l < 3; l++) {

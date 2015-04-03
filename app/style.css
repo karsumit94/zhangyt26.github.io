@@ -1,28 +1,28 @@
+.sudoku {
+    background-image: url("../assets/background.jpg");
+}
+
 .sudoku-table {
     border: #AAA solid 2px;
-    cellspacing: 0;
-    min-width: 550px;
-    min-height: 550px;
-    border-spacing: 0;
+    width: 550px;
+    height: 550px;
     display: table;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
 }
+
 .sudoku-cell {
     width: 33%;
     height: 33%;
-    padding: 0;
 }
 .sudoku-sub-stable {
     width: 180px;
     height: 180px;
-    border: red solid 1px;
-    border-spacing: 0;
-    /*    display: table;*/
+    border: #AAA solid 1px;
+    border-radius: 10px;
 }
 .sudoku-sub-row {
-    /*
-    border: dashed;
-    border-width: 0 2px 0 0;
-*/
 }
 .board-container {
     width: 100%;
@@ -34,9 +34,11 @@
     height: 33%;
     border: dashed;
     border-width: 1px 1px 1px 1px;
-    padding: 0;
-    border-color: cornflowerblue;
-    border-radius: 2px;
+    border-color: black;
+    border-radius: 5px;
+    color: black;
+    font-size: x-large;
+    font-weight: bolder;
     -moz-user-select: none;
     -khtml-user-select: none;
     -webkit-user-select: none;
@@ -44,7 +46,7 @@
     user-select: none;
 }
 .sudoku-fix-input {
-    background-color: aqua;
+    background-color: rgba(216, 21, 66, 0.47);
 }
 .sudoku-valid-input {
     color: blue;

@@ -1,19 +1,36 @@
 define(["jquery", "engine"], function ($, engine) {
     'use strict';
-    var firstCell1 = [[5, 3, 0], [6, 0, 0], [0, 9, 8]],
-        secondCell1 = [[0, 7, 0], [1, 9, 5], [0, 0, 0]],
-        thirdCell1 = [[0, 0, 0], [0, 0, 0], [0, 6, 0]],
+    //    var firstCell1 = [[5, 3, 0], [6, 0, 0], [0, 9, 8]],
+    //        secondCell1 = [[0, 7, 0], [1, 9, 5], [0, 0, 0]],
+    //        thirdCell1 = [[0, 0, 0], [0, 0, 0], [0, 6, 0]],
+    //        firstRow = [firstCell1, secondCell1, thirdCell1];
+    //
+    //    var firstCell2 = [[8, 0, 0], [4, 0, 0], [7, 0, 0]],
+    //        secondCell2 = [[0, 6, 0], [8, 0, 3], [0, 2, 0]],
+    //        thirdCell2 = [[0, 0, 3], [0, 0, 1], [0, 0, 6]],
+    //        secondRow = [firstCell2, secondCell2, thirdCell2];
+    //
+    //    var firstCell3 = [[0, 6, 0], [0, 0, 0], [0, 0, 0]],
+    //        secondCell3 = [[0, 0, 0], [4, 1, 9], [0, 8, 0]],
+    //        thirdCell3 = [[2, 8, 0], [0, 0, 5], [0, 7, 9]],
+    //        thirdRow = [firstCell3, secondCell3, thirdCell3];
+
+
+    var firstCell1 = [[5, 3, 4], [6, 7, 2], [1, 9, 8]],
+        secondCell1 = [[6, 7, 8], [1, 9, 5], [3, 4, 2]],
+        thirdCell1 = [[9, 1, 2], [3, 4, 8], [5, 6, 7]],
         firstRow = [firstCell1, secondCell1, thirdCell1];
 
-    var firstCell2 = [[8, 0, 0], [7, 0, 0], [4, 0, 0]],
-        secondCell2 = [[0, 6, 0], [8, 0, 3], [0, 2, 0]],
-        thirdCell2 = [[0, 0, 3], [0, 0, 1], [0, 0, 6]],
+    var firstCell2 = [[8, 5, 9], [4, 2, 6], [7, 1, 3]],
+        secondCell2 = [[7, 6, 1], [8, 5, 3], [9, 2, 4]],
+        thirdCell2 = [[4, 2, 3], [7, 9, 1], [8, 5, 6]],
         secondRow = [firstCell2, secondCell2, thirdCell2];
 
-    var firstCell3 = [[0, 6, 0], [0, 0, 0], [0, 0, 0]],
-        secondCell3 = [[0, 0, 0], [4, 1, 9], [0, 8, 0]],
-        thirdCell3 = [[2, 8, 0], [0, 0, 5], [0, 7, 9]],
+    var firstCell3 = [[9, 6, 1], [2, 8, 7], [3, 4, 5]],
+        secondCell3 = [[5, 3, 7], [4, 1, 9], [2, 8, 6]],
+        thirdCell3 = [[2, 8, 4], [6, 3, 5], [1, 7, 0]],
         thirdRow = [firstCell3, secondCell3, thirdCell3];
+
 
     var gameEngine;
 
@@ -21,6 +38,9 @@ define(["jquery", "engine"], function ($, engine) {
         this.gameBoard = [firstRow, secondRow, thirdRow];
         gameEngine = new engine(this.gameBoard);
         gameEngine.init();
+        gameEngine.onGameWinning = function () {
+            console.log("hey, game over!");
+        }
     };
 
     Board.prototype.init = function (container) {
@@ -40,7 +60,7 @@ define(["jquery", "engine"], function ($, engine) {
                             userCell.text(this.gameBoard[i][j][k][l]);
                             userCell.addClass('sudoku-fix-input');
                         }
-                        
+
                         userCell.attr("id", i.toString() + j.toString() + k.toString() + l.toString());
                         innerRow.append(userCell);
                     }
@@ -76,9 +96,10 @@ define(["jquery", "engine"], function ($, engine) {
                 newValue, function (isAlreadyValid, isValid) {
                     console.log(isAlreadyValid + " " + isValid);
                     if ((isAlreadyValid && !isValid) || (!isAlreadyValid && isValid)) {
+                        console.log("toggle");
                         $(this).toggleClass("sudoku-invalid-input");
                     }
-                
+
                 }.bind(this));
         });
     }

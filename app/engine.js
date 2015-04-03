@@ -5,17 +5,17 @@ define([], function () {
     var Engine = function (gameBoard) {
         this.board = gameBoard;
         this.onGameWinning;
-        
+
     }
-    
-    Engine.prototype.init = function(successCallBack, errorCallBack) {
+
+    Engine.prototype.init = function (successCallBack, errorCallBack) {
         if (!this.board) {
             if (errorCallBack) {
                 errorCallBack();
             }
             return;
         }
-        
+
         for (var i = 0; i < 3; i++) {
             for (var j = 0; j < 3; j++) {
                 for (var k = 0; k < 3; k++) {
@@ -27,7 +27,7 @@ define([], function () {
                 }
             }
         }
-        
+
         if (successCallBack) {
             successCallBack();
         }
@@ -38,7 +38,7 @@ define([], function () {
         if (this.board[i][j][k][l] === 0) {
             return true;
         }
-        
+
         // check the sub-table
         for (var a = 0; a < 3; a++) {
             for (var b = 0; b < 3; b++) {
@@ -59,12 +59,13 @@ define([], function () {
                 if (num && this.board[i][a][k][b] === num) {
                     return false;
                 } else {
-                    if (this.board[i][a][k][b] === this.board[i][j][k][l] && a !== j && b !== l) {
+                    if (this.board[i][a][k][b] === this.board[i][j][k][l] && (a !== j || b !== l)) {
                         return false;
                     }
                 }
             }
         }
+
 
         // check vertical
         for (var a = 0; a < 3; a++) {
@@ -72,7 +73,7 @@ define([], function () {
                 if (num && this.board[a][j][b][l] === num) {
                     return false;
                 } else {
-                    if (this.board[a][j][b][l] === this.board[i][j][k][l] && a !== i && b !== k) {
+                    if (this.board[a][j][b][l] === this.board[i][j][k][l] && (a !== i || b !== k)) {
                         return false;
                     }
                 }
@@ -83,13 +84,12 @@ define([], function () {
 
     Engine.prototype.makeAMove = function (i, j, l, k, num, callback) {
         var isAlreadyValid = this.isValid(i, j, l, k);
-        console.log("engine", isAlreadyValid);
+        var previousValue = this.board[i][j][l][k];
         this.board[i][j][l][k] = num;
         var isValid = this.isValid(i, j, l, k);
-        if (isAlreadyValid && !isValid) {
+        if (isAlreadyValid && previousValue!== 0 && !isValid) {
             invalidCount++;
-        }
-        else if (!isAlreadyValid && isValid) {
+        } else if (!isAlreadyValid && isValid) {
             invalidCount--;
         }
         if (callback) {
@@ -99,13 +99,13 @@ define([], function () {
             this.onGameWinning();
         }
     }
-    
+
     return Engine;
 
 
 });
 
-                                    // check the cell
+// check the cell
 //                                    for (var a=0; a<3; a++) {
 //                                        for (var b=0; b<3; b++) {
 ////                                            console.log(board[i][j][a][b]);

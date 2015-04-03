@@ -35,10 +35,12 @@ define(["jquery", "engine"], function ($, engine) {
                     for (var l = 0; l < 3; l++) {
                         var userCell = $('<td></td>');
                         userCell.addClass('sudoku-input');
-                        userCell.addClass('sudoku-valid-input');
+
                         if (this.gameBoard[i][j][k][l] !== 0) {
                             userCell.text(this.gameBoard[i][j][k][l]);
+                            userCell.addClass('sudoku-fix-input');
                         }
+                        
                         userCell.attr("id", i.toString() + j.toString() + k.toString() + l.toString());
                         innerRow.append(userCell);
                     }
@@ -53,6 +55,7 @@ define(["jquery", "engine"], function ($, engine) {
 
         // bind click event for all sudoku-input
         $(".sudoku-input").bind("click", function (event) {
+            if ($(this).hasClass('sudoku-fix-input')) return;
             var id = $(this).attr("id");
             var text = $(this).text();
             var newValue;

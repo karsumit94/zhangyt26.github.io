@@ -1,5 +1,5 @@
 define([], function () {
-
+    'use strict';
     var invalidCount = 0;
 
     var Engine = function (gameBoard) {
@@ -82,7 +82,8 @@ define([], function () {
     }
 
     Engine.prototype.makeAMove = function (i, j, l, k, num, callback) {
-        var isAlreadyValid = this.isValid(i, j, k, l);
+        var isAlreadyValid = this.isValid(i, j, l, k);
+        console.log("engine", isAlreadyValid);
         this.board[i][j][l][k] = num;
         var isValid = this.isValid(i, j, l, k);
         if (isAlreadyValid && !isValid) {

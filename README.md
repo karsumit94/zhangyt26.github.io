@@ -19,24 +19,47 @@ http://localhost:8000/index.htm while it's running.
 ## Documentation
 
 ````javascript
-engine.js
-Engine is the abstraction of the gaming rule. It expose APIs to determine whether a move
-is legal or not. It also tells you whether the game is won.
+//engine.js
+//Engine is the abstraction of the gaming rule.
+var Engine = function (gameBoard) {
+    this.invalidCount = 0;      //how many invalid cells left
+    this.board = gameBoard;     //gaming board
+    this.onGameWinning = null;  //function callback. This will be called if game is won.
 
-constructor(gameBoard)
-invalidCount: how many invalid cells left
-board: gaming board
-onGameWinning: function callback. This will be called if game is won.
-init(successCallBack, errorCallBack): initalize the gaming engine. If board is invalid, error call back will be called.
-isValid(i, j, k, l, num): to determine wehter this move is valid. If num is absent, then check if the existing number in the cell is valid.
-makeAMove(i, j, k, l, num, callback): make a move in the engine. Callback will tell you whether the previous number in the cell is valid and whether current number is valid.
+};
+//initalize the gaming engine. If board is invalid, error call back will be called.
+Engine.prototype.init = function (successCallBack, errorCallBack) {...};
 
-Board is the abstraction of the game board. It handles the board rendering and game state.
-APIs:
-init(container): container is the class that you want to use for board rendering.
-removeBoard(): removing the board from container.
-loadGame(state): loading the game with saved data.
+//to determine wehter this move is valid. If num is absent, then check if the existing number in the cell is valid.
+Engine.prototype.isValid = function (i, j, k, l, num) {...};
 
-main.js:
-This module interface with non-gaming related stuff.
+//make a move in the engine. Callback will tell you whether the previous number in the cell is valid and whether current number is valid.
+Engine.prototype.makeAMove = function (i, j, k, l, num, callback) {...};
+
+//board.js
+//Board is the abstraction of the game board. It handles the board rendering and game state.
+var Board = function () {
+    this.gameBoard = $.extend(true, [], defaultBoard);  //gaming board
+    this.gameState = {};                                //numbers set by player
+    this.gameEngine = new Engine(this.gameBoard);       //game engine
+    this.gameEngine.init();
+    this.boardContainer = null;                         //container to use for rendering
+};
+
+//container is the css class that you want to use for board rendering. winning callback is a callback function which will be triggered if the game is won.
+Board.prototype.init = function (container, winningCallback) {...};
+
+//removing the board from container.
+Board.prototype.removeBoard = function () {...};
+
+//loading the game with saved data.
+Board.prototype.loadGame = function (state) {...};
+
+//main.js:
+//This module interface with non-gaming related stuff. It uses localStorage to store the user states. It can be extended by sending data to server.
 ```
+
+## Things that can be improved
+UI enhancement
+Media query for different devices
+Unit testing

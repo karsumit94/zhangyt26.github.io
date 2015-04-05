@@ -18,7 +18,8 @@ http://localhost:8000/index.htm while it's running.
 
 ## Documentation
 
-engine.js:
+````javascript
+engine.js
 Engine is the abstraction of the gaming rule. It expose APIs to determine whether a move
 is legal or not. It also tells you whether the game is won.
 
@@ -38,3 +39,4 @@ loadGame(state): loading the game with saved data.
 
 main.js:
 This module interface with non-gaming related stuff.
+```

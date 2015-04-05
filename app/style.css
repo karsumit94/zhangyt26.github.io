@@ -89,11 +89,8 @@
 .sudoku-input {
     width: 33%;
     height: 33%;
-    border: dashed;
-    border-width: 1px 1px 1px 1px;
-    border-color: black;
+    border: black dashed 1px;
     border-radius: 5px;
-    color: rgb(0, 221, 212);
     font-size: x-large;
     font-weight: bolder;
     -moz-user-select: none;
@@ -101,6 +98,8 @@
     -webkit-user-select: none;
     -o-user-select: none;
     user-select: none;
+    color: white;
+    background-color: rgba(0, 128, 0, 0.56);
 }
 
 .sudoku-input-hover {
@@ -116,5 +115,4 @@
 .sudoku-invalid-input {
     background-color: rgba(255, 0, 0, 0.66);
     color: white;
-    z-index: 100;
 }

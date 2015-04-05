@@ -54,7 +54,7 @@ define(["jquery", "engine"], function ($, Engine) {
                             userCell.addClass('sudoku-fix-input');
                         }
 
-                        userCell.attr("id", i.toString() + j.toString() + l.toString() + k.toString());
+                        userCell.attr("id", i.toString() + j.toString() + k.toString() + l.toString());
                         innerRow.append(userCell);
                     }
                     cellTable.append(innerRow);
@@ -101,9 +101,9 @@ define(["jquery", "engine"], function ($, Engine) {
         });
     }
 
-    function makeAMoveCallBack(i, j, l, k, isAlreadyValid, isValid) {
+    function makeAMoveCallBack(i, j, k, l, isAlreadyValid, isValid) {
         if ((isAlreadyValid && !isValid) || (!isAlreadyValid && isValid)) {
-            $('#' + i.toString() + j.toString() + l.toString() + k.toString())
+            $('#' + i.toString() + j.toString() + k.toString() + l.toString())
                 .toggleClass("sudoku-invalid-input");
         }
     }

@@ -83,18 +83,18 @@ define([], function () {
         return true;
     };
 
-    Engine.prototype.makeAMove = function (i, j, l, k, num, callback) {
-        var isAlreadyValid = this.isValid(i, j, l, k);
-        var previousValue = this.board[i][j][l][k];
-        this.board[i][j][l][k] = num;
-        var isValid = this.isValid(i, j, l, k);
+    Engine.prototype.makeAMove = function (i, j, k, l, num, callback) {
+        var isAlreadyValid = this.isValid(i, j, k, l);
+        var previousValue = this.board[i][j][k][l];
+        this.board[i][j][k][l] = num;
+        var isValid = this.isValid(i, j, k, l);
         if (isAlreadyValid && previousValue!== 0 && !isValid) {
             this.invalidCount++;
         } else if ((previousValue === 0 || !isAlreadyValid) && isValid) {
             this.invalidCount--;
         }
         if (callback) {
-            callback(i, j, l, k, isAlreadyValid, isValid);
+            callback(i, j, k, l, isAlreadyValid, isValid);
         }
         if (this.invalidCount === 0 && this.onGameWinning) {
             this.onGameWinning();

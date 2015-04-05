@@ -89,13 +89,13 @@ define([], function () {
         var isValid = this.isValid(i, j, l, k);
         if (isAlreadyValid && previousValue!== 0 && !isValid) {
             this.invalidCount++;
-        } else if (!isAlreadyValid && isValid) {
+        } else if ((previousValue === 0 || !isAlreadyValid) && isValid) {
             this.invalidCount--;
         }
         if (callback) {
             callback(isAlreadyValid, isValid);
         }
-        if (this.invalidCount === 0) {
+        if (this.invalidCount === 0 && this.onGameWinning) {
             this.onGameWinning();
         }
     }

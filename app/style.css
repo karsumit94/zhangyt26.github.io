@@ -22,7 +22,22 @@
 
 .buttons-row button:hover, .buttons-row button:active {
     background-color: white;
+}
 
+.info-bar {
+    text-align: center;
+    color: white;
+    font-size: large;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 8px;
+    border: black solid 2px;
+    width: 550px;
+    transition: all 2s ease;
+}
+
+.info-bar-active {
+    background: red;
 }
 
 .board-container {

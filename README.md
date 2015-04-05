@@ -29,9 +29,11 @@ var Engine = function (gameBoard) {
 };
 //initalize the gaming engine. If board is invalid, error call back will be called.
 Engine.prototype.init = function (successCallBack, errorCallBack) {...};
-//to determine wehter this move is valid. If num is absent, then check if the existing number in the cell is valid.
+//to determine wehter this move is valid. If num is absent, 
+then check if the existing number in the cell is valid.
 Engine.prototype.isValid = function (i, j, k, l, num) {...};
-//make a move in the engine. Callback will tell you whether the previous number in the cell is valid and whether current number is valid.
+//make a move in the engine. Callback will tell you whether the 
+previous number in the cell is valid and whether current number is valid.
 Engine.prototype.makeAMove = function (i, j, k, l, num, callback) {...};
 ```
 
@@ -46,7 +48,8 @@ var Board = function () {
     this.boardContainer = null;                         //container to use for rendering
 };
 
-//container is the css class that you want to use for board rendering. winning callback is a callback function which will be triggered if the game is won.
+//container is the css class that you want to use for board rendering. 
+winning callback is a callback function which will be triggered if the game is won.
 Board.prototype.init = function (container, winningCallback) {...};
 //removing the board from container.
 Board.prototype.removeBoard = function () {...};

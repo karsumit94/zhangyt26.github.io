@@ -1,8 +1,8 @@
 define([], function () {
     'use strict';
-    var invalidCount = 0;
-
+    
     var Engine = function (gameBoard) {
+        this.invalidCount = 0;
         this.board = gameBoard;
         this.onGameWinning;
 
@@ -21,7 +21,7 @@ define([], function () {
                 for (var k = 0; k < 3; k++) {
                     for (var l = 0; l < 3; l++) {
                         if (this.board[i][j][k][l] === 0) {
-                            invalidCount++;
+                            this.invalidCount++;
                         }
                     }
                 }
@@ -88,14 +88,14 @@ define([], function () {
         this.board[i][j][l][k] = num;
         var isValid = this.isValid(i, j, l, k);
         if (isAlreadyValid && previousValue!== 0 && !isValid) {
-            invalidCount++;
+            this.invalidCount++;
         } else if (!isAlreadyValid && isValid) {
-            invalidCount--;
+            this.invalidCount--;
         }
         if (callback) {
             callback(isAlreadyValid, isValid);
         }
-        if (invalidCount === 0) {
+        if (this.invalidCount === 0) {
             this.onGameWinning();
         }
     }

@@ -1,36 +1,34 @@
-define(["jquery", "engine"], function ($, engine) {
+define(["jquery", "engine"], function ($, Engine) {
     'use strict';
-        var firstCell1 = [[5, 3, 4], [6, 7, 2], [1, 9, 8]],
-            secondCell1 = [[6, 7, 8], [1, 9, 5], [3, 4, 2]],
-            thirdCell1 = [[9, 1, 2], [3, 4, 8], [5, 6, 7]],
-            firstRow = [firstCell1, secondCell1, thirdCell1];
-    
-        var firstCell2 = [[8, 5, 9], [4, 2, 6], [7, 1, 3]],
-            secondCell2 = [[7, 6, 1], [8, 5, 3], [9, 2, 4]],
-            thirdCell2 = [[4, 2, 3], [7, 9, 1], [8, 5, 6]],
-            secondRow = [firstCell2, secondCell2, thirdCell2];
-    
-        var firstCell3 = [[9, 6, 1], [2, 8, 7], [3, 4, 5]],
-            secondCell3 = [[5, 3, 7], [4, 1, 9], [2, 8, 6]],
-            thirdCell3 = [[2, 8, 4], [6, 3, 5], [0, 7, 9]],
-            thirdRow = [firstCell3, secondCell3, thirdCell3];
-        var defaultBoard = [firstRow, secondRow, thirdRow];
+    //        var firstCell1 = [[5, 3, 4], [6, 7, 2], [1, 9, 8]],
+    //            secondCell1 = [[6, 7, 8], [1, 9, 5], [3, 4, 2]],
+    //            thirdCell1 = [[9, 1, 2], [3, 4, 8], [5, 6, 7]],
+    //            firstRow = [firstCell1, secondCell1, thirdCell1];
+    //    
+    //        var firstCell2 = [[8, 5, 9], [4, 2, 6], [7, 1, 3]],
+    //            secondCell2 = [[7, 6, 1], [8, 5, 3], [9, 2, 4]],
+    //            thirdCell2 = [[4, 2, 3], [7, 9, 1], [8, 5, 6]],
+    //            secondRow = [firstCell2, secondCell2, thirdCell2];
+    //    
+    //        var firstCell3 = [[9, 6, 1], [2, 8, 7], [3, 4, 5]],
+    //            secondCell3 = [[5, 3, 7], [4, 1, 9], [2, 8, 6]],
+    //            thirdCell3 = [[2, 8, 4], [6, 3, 5], [0, 7, 9]],
+    //            thirdRow = [firstCell3, secondCell3, thirdCell3];
+    //        var defaultBoard = [firstRow, secondRow, thirdRow];
 
-//    var firstCell1 = [[5, 3, 0], [6, 0, 0], [0, 9, 8]],
-//        secondCell1 = [[0, 7, 0], [1, 9, 5], [0, 0, 0]],
-//        thirdCell1 = [[0, 0, 0], [0, 0, 0], [0, 6, 0]],
-//        firstRow = [firstCell1, secondCell1, thirdCell1];
-//
-//    var firstCell2 = [[8, 0, 0], [4, 0, 0], [7, 0, 0]],
-//        secondCell2 = [[0, 6, 0], [8, 0, 3], [0, 2, 0]],
-//        thirdCell2 = [[0, 0, 3], [0, 0, 1], [0, 0, 6]],
-//        secondRow = [firstCell2, secondCell2, thirdCell2];
-//
-//    var firstCell3 = [[0, 6, 0], [0, 0, 0], [0, 0, 0]],
-//        secondCell3 = [[0, 0, 0], [4, 1, 9], [0, 8, 0]],
-//        thirdCell3 = [[2, 8, 0], [0, 0, 5], [0, 7, 9]],
-//        thirdRow = [firstCell3, secondCell3, thirdCell3];
-//    var defaultBoard = [firstRow, secondRow, thirdRow];
+    var firstCell1 = [[5, 3, 0], [6, 0, 0], [0, 9, 8]],
+        secondCell1 = [[0, 7, 0], [1, 9, 5], [0, 0, 0]],
+        thirdCell1 = [[0, 0, 0], [0, 0, 0], [0, 6, 0]],
+        firstRow = [firstCell1, secondCell1, thirdCell1],
+        firstCell2 = [[8, 0, 0], [4, 0, 0], [7, 0, 0]],
+        secondCell2 = [[0, 6, 0], [8, 0, 3], [0, 2, 0]],
+        thirdCell2 = [[0, 0, 3], [0, 0, 1], [0, 0, 6]],
+        secondRow = [firstCell2, secondCell2, thirdCell2],
+        firstCell3 = [[0, 6, 0], [0, 0, 0], [0, 0, 0]],
+        secondCell3 = [[0, 0, 0], [4, 1, 9], [0, 8, 0]],
+        thirdCell3 = [[2, 8, 0], [0, 0, 5], [0, 7, 9]],
+        thirdRow = [firstCell3, secondCell3, thirdCell3],
+        defaultBoard = [firstRow, secondRow, thirdRow];
 
     function createTable(gameBoard) {
         var table = $('<table></table>');
@@ -56,7 +54,7 @@ define(["jquery", "engine"], function ($, engine) {
                             userCell.addClass('sudoku-fix-input');
                         }
 
-                        userCell.attr("id", i.toString() + j.toString() + k.toString() + l.toString());
+                        userCell.attr("id", i.toString() + j.toString() + l.toString() + k.toString());
                         innerRow.append(userCell);
                     }
                     cellTable.append(innerRow);
@@ -71,8 +69,10 @@ define(["jquery", "engine"], function ($, engine) {
 
     function bindInputEvents(gameEngine, gameState) {
         // bind click event for all sudoku-input
-        $(".sudoku-input").bind("click", function (event) {
-            if ($(this).hasClass('sudoku-fix-input')) return;
+        $(".sudoku-input").bind("click", function () {
+            if ($(this).hasClass('sudoku-fix-input')) {
+                return;
+            }
             var id = $(this).attr("id");
             var text = $(this).text();
             var newValue;
@@ -90,14 +90,7 @@ define(["jquery", "engine"], function ($, engine) {
             }
             gameEngine.makeAMove(parseInt(id.charAt(0)), parseInt(id.charAt(1)),
                 parseInt(id.charAt(2)), parseInt(id.charAt(3)),
-                newValue, function (isAlreadyValid, isValid) {
-                    console.log(isAlreadyValid + " " + isValid);
-                    if ((isAlreadyValid && !isValid) || (!isAlreadyValid && isValid)) {
-                        console.log("toggle");
-                        $(this).toggleClass("sudoku-invalid-input");
-                    }
-
-                }.bind(this));
+                newValue, makeAMoveCallBack);
             gameState[id] = newValue;
         });
 
@@ -105,15 +98,22 @@ define(["jquery", "engine"], function ($, engine) {
             $(this).toggleClass("sudoku-input-hover");
         }, function () {
             $(this).toggleClass("sudoku-input-hover");
-        })
+        });
+    }
+
+    function makeAMoveCallBack(i, j, l, k, isAlreadyValid, isValid) {
+        if ((isAlreadyValid && !isValid) || (!isAlreadyValid && isValid)) {
+            $('#' + i.toString() + j.toString() + l.toString() + k.toString())
+                .toggleClass("sudoku-invalid-input");
+        }
     }
 
     var Board = function () {
         this.gameBoard = $.extend(true, [], defaultBoard);
         this.gameState = {};
-        this.gameEngine = new engine(this.gameBoard);
+        this.gameEngine = new Engine(this.gameBoard);
         this.gameEngine.init();
-        
+
         this.boardContainer = null;
     };
 
@@ -121,32 +121,29 @@ define(["jquery", "engine"], function ($, engine) {
         this.boardContainer = container;
         $(container).append(createTable(this.gameBoard));
         bindInputEvents(this.gameEngine, this.gameState);
-        this.gameEngine.onGameWinning = function() {
+        this.gameEngine.onGameWinning = function () {
             $(".sudoku-input").unbind();
             winningCallback();
         };
-    }
+    };
 
     Board.prototype.removeBoard = function () {
         $(this.boardContainer).empty();
-    }
+    };
 
     Board.prototype.loadGame = function (state) {
+
         for (var id in state) {
             if (state.hasOwnProperty(id) && state[id] !== 0) {
-                
-                $('#'+id).text(state[id]);
-                
+
+                $('#' + id).text(state[id]);
+
                 this.gameEngine.makeAMove(parseInt(id.charAt(0)), parseInt(id.charAt(1)),
                     parseInt(id.charAt(2)), parseInt(id.charAt(3)),
-                    state[id], function (isAlreadyValid, isValid) {
-                        if (!isValid) {
-                            $('#'+id).toggleClass("sudoku-invalid-input");
-                        }
-                    }.bind(this));
+                    state[id], makeAMoveCallBack);
             }
         }
-    }
+    };
 
     return Board;
 

@@ -40,6 +40,14 @@
     background: red;
 }
 
+.info-bar-save {
+    background: green;
+}
+
+.info-bar-load {
+    background: blue;
+}
+
 .board-container {
     width: 100%;
     height: 100%;

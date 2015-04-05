@@ -4,9 +4,9 @@ define([], function () {
     var Engine = function (gameBoard) {
         this.invalidCount = 0;
         this.board = gameBoard;
-        this.onGameWinning;
+        this.onGameWinning = null;
 
-    }
+    };
 
     Engine.prototype.init = function (successCallBack, errorCallBack) {
         if (!this.board) {
@@ -31,17 +31,18 @@ define([], function () {
         if (successCallBack) {
             successCallBack();
         }
-    }
+    };
 
     Engine.prototype.isValid = function (i, j, k, l, num) {
         // if no value, always true
+        var a = 0, b = 0;
         if (this.board[i][j][k][l] === 0) {
             return true;
         }
 
         // check the sub-table
-        for (var a = 0; a < 3; a++) {
-            for (var b = 0; b < 3; b++) {
+        for (a = 0; a < 3; a++) {
+            for (b = 0; b < 3; b++) {
                 if (num && this.board[i][j][a][b] === num) {
                     return false;
                 } else {
@@ -54,8 +55,8 @@ define([], function () {
         }
 
         // check horizontal
-        for (var a = 0; a < 3; a++) {
-            for (var b = 0; b < 3; b++) {
+        for (a = 0; a < 3; a++) {
+            for (b = 0; b < 3; b++) {
                 if (num && this.board[i][a][k][b] === num) {
                     return false;
                 } else {
@@ -68,8 +69,8 @@ define([], function () {
 
 
         // check vertical
-        for (var a = 0; a < 3; a++) {
-            for (var b = 0; b < 3; b++) {
+        for (a = 0; a < 3; a++) {
+            for (b = 0; b < 3; b++) {
                 if (num && this.board[a][j][b][l] === num) {
                     return false;
                 } else {
@@ -80,7 +81,7 @@ define([], function () {
             }
         }
         return true;
-    }
+    };
 
     Engine.prototype.makeAMove = function (i, j, l, k, num, callback) {
         var isAlreadyValid = this.isValid(i, j, l, k);
@@ -93,12 +94,12 @@ define([], function () {
             this.invalidCount--;
         }
         if (callback) {
-            callback(isAlreadyValid, isValid);
+            callback(i, j, l, k, isAlreadyValid, isValid);
         }
         if (this.invalidCount === 0 && this.onGameWinning) {
             this.onGameWinning();
         }
-    }
+    };
 
     return Engine;
 
